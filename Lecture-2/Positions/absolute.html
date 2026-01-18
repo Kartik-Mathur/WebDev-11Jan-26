@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Document</title>
+
+    <style>
+
+        /* Absolute works wrt body by default, agar koi aur nearest parent ko position dedi toh uske respect
+        mei work krne lagega.... */
+        /* Element will leave its original space in this case.... */
+        .div{
+            min-height: 100px;
+            border: 1px solid black;
+            padding: 10px;
+        }
+
+        .element{
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color: white;
+        }
+
+        .parent{
+            position: relative;
+        }
+
+        .child{
+            position: relative;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="div parent">
+        Parent
+        <div class="div child">
+            Child
+            <div class="div element">
+                Element
+            </div>
+        </div>
+    </div>
+
+    
+    <div>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+
+        <div style="border: 1px solid black; position: relative;">I am a random div</div>
+        Perferendis sapiente assumenda consequatur repellendus, fuga dolores laboriosam, asperiores nisi officia molestias eius quidem pariatur dolorum est? Possimus, assumenda, omnis commodi voluptate sequi alias ex labore eos, natus temporibus ipsum enim quasi? Molestias dignissimos non eligendi assumenda eaque impedit, maiores voluptatem aspernatur numquam hic velit dolorem quia corrupti officiis? Facere aliquid veniam doloribus voluptas animi vero vitae pariatur quo quos fugit reiciendis aut ipsam culpa delectus fugiat, blanditiis architecto. Praesentium sint esse, tempora quidem nisi saepe quod necessitatibus placeat quae corporis repudiandae earum, quam a reiciendis ducimus quasi amet fugit, natus itaque rerum. Ex quos recusandae, eaque, accusantium illum, odit sequi deleniti fugit laboriosam ducimus qui eligendi tempora nemo officia ut nisi? Ipsam quae cumque saepe libero deserunt quo quos fugit eligendi aspernatur odio. Officiis nostrum, dicta, laborum velit incidunt animi corrupti, fugiat architecto impedit illo dignissimos voluptatibus reprehenderit eaque tempora debitis? Commodi blanditiis ea, quis inventore rerum repellendus. Quis exercitationem blanditiis nobis! Illo ducimus sint natus incidunt nemo omnis dolore, autem voluptatum molestiae dicta nobis magnam dolores voluptates a accusamus accusantium dolor eos illum minima sunt eum molestias fugiat explicabo? Dolore a, quasi unde repudiandae quia doloribus quod aperiam eaque sequi?
+    </div>
+</body>
+
+</html>

@@ -1,25 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
     <style>
-        .div1{
+        .div1 {
             border-width: 1px;
             border-style: solid;
             border-color: black;
 
             padding: 20px;
-            margin: 10px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
         }
 
-        .div2{
+        .div2 {
+            margin-top: 10px;
+            box-sizing: border-box;
             border: 1px solid black;
         }
+
         /* universal selector */
-        *{
+        * {
             margin: 0;
             padding: 0;
         }
@@ -27,8 +30,9 @@
 
 
 </head>
+
 <body>
-    
+
     <div class="div1">
         I am a div - 1
     </div>
@@ -37,4 +41,5 @@
         I am a div - 2
     </div>
 </body>
+
 </html>
