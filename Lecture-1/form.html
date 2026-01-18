@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <!-- 
+    Abhi ke liye remember form has two attributes
+     1. action: URL jaha par form submit krna hai
+     2. method: by default it is GET(Kya hai yeh pata nhi abhi, just remember)
+
+     - Form also has a button with type="submit"
+      -->
+    <form action="https://www.google.com/search" method="GET">
+        <input name="q" type="text" placeholder="Enter To Search on Google">
+        <button type="submit">Search</button>
+    </form>
+    
+    <!-- https://www.bing.com/search -->
+     <form action="https://www.bing.com/search" method="GET">
+        <input name="q" type="text" placeholder="Enter To Search on Bing">
+        <button type="submit">Search On Bing</button>
+    </form>
+
+    <!-- Jab URL nhi dete toh we use # -->
+    <form action="#">
+        <br>
+        <fieldset>
+            <legend>User Information</legend>
+            <input type="text" placeholder="Enter Name">
+            <input type="text" placeholder="Enter Age">
+        </fieldset>
+        <br>
+        <fieldset>
+            <legend>Additional Information</legend>
+            <textarea placeholder="Enter Why Should We Hire You?"></textarea>
+        </fieldset>
+    </form>
+</body>
+</html>
