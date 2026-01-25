@@ -1,0 +1,26 @@
+/* lvha */
+/* 
+l: link -> Pehli baar site open kri
+v: visited -> Click kr diya link par
+h: hover -> Cursor link ke upar le gaye
+a: active -> Click kia but leave nhi kia click ko
+*/
+
+.navbar a {
+    color: black;
+    /* Underline hata dega  */
+    text-decoration: none;
+}
+
+.navbar a:visited {
+    color: blue;
+}
+
+.navbar a:hover {
+    text-decoration: underline;
+}
+
+.navbar a:active {
+    color: white;
+    background-color: black;
+}
