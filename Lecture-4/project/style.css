@@ -1,19 +1,16 @@
 body{
-    border: 10px solid black;
-    height: 60vh;
-    width: 60vw;
     background-image: url('./image.png');
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: cover;
 }
 
 .ball{
     /* border: 10px solid black; */
-    background-color: red;
+    background-color: rgb(2, 30, 141);
     border-radius: 50%;
     height: 80px;
     width: 80px;
     position: relative;
-    top: 25vh;
-    left: 25vw;
+    top: 40vh;
+    left: 55vw;
 }
