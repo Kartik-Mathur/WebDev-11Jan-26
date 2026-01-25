@@ -15,11 +15,14 @@ body {
     background-color: rgb(211, 33, 211);
     height: 100%;
     width: 0%;
-    animation-name: loader;
-    animation-duration: 5s;
+    
+    /* animation-name: loader;
+    animation-duration: 5s; */
     /* Animation ki final state par rokna h: forwards */
     /* Animation ki initial state par rokna h: backwards */
-    animation-fill-mode: forwards;
+    /* animation-fill-mode: forwards;
+    animation-iteration-count: infinite; */
+    animation: loader 5s forwards infinite;
 }
 
 /* Box par jab hover krenge toh uske andar ka item
@@ -45,7 +48,7 @@ jo hoga uspr css apply kregi yeh wali */
     }
 
     40%{
-        width: 30%;
+        width: 100%;
     }
 
     70%{
@@ -56,3 +59,8 @@ jo hoga uspr css apply kregi yeh wali */
         width: 100%;
     }
 }
+
+
+
+
+
