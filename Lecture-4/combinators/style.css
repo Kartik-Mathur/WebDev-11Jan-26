@@ -1,0 +1,9 @@
+/* For all children(descendants)*/
+ul li {
+    color: red;
+}
+
+/* For direct children */
+.mydiv>div {
+    color: orange
+}
