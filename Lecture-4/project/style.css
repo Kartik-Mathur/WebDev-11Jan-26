@@ -1,10 +1,10 @@
-body{
+body {
     background-image: url('./image.png');
     background-repeat: no-repeat;
     background-size: cover;
 }
 
-.ball{
+.ball {
     /* border: 10px solid black; */
     background-color: rgb(2, 30, 141);
     border-radius: 50%;
@@ -13,4 +13,54 @@ body{
     position: relative;
     top: 40vh;
     left: 55vw;
+    animation: ballbounce 2.5s infinite;
+}
+
+.ball-shadow {
+    background-color: rgb(100, 101, 104);
+    border-radius: 50%;
+    height: 60px;
+    width: 80px;
+    position: relative;
+    top: 75vh;
+    left: 70vw;
+    animation: shadowmove 2.5s infinite;
+    z-index: -1;
+}
+
+@keyframes ballbounce {
+    0% {
+        top: 40vh;
+    }
+
+    50% {
+        top: 75vh;
+    }
+    60%{
+        top: 76vh;
+        height: 70px;
+    }
+
+    100% {
+        top: 40vh;
+    }
+}
+
+@keyframes shadowmove {
+    0% {
+        left: 70vw;
+    }
+
+    50% {
+        left: 55vw;
+        height: 58px;
+    }
+    60%{
+        left: 56vw;
+        height: 60px;
+    }
+
+    100% {
+        left: 70vw;
+    }
 }
