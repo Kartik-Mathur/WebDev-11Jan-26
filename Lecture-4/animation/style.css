@@ -1,0 +1,58 @@
+body {
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.box {
+    width: 1200px;
+    height: 250px;
+    border: 4px solid black;
+}
+
+.item {
+    background-color: rgb(211, 33, 211);
+    height: 100%;
+    width: 0%;
+    animation-name: loader;
+    animation-duration: 5s;
+    /* Animation ki final state par rokna h: forwards */
+    /* Animation ki initial state par rokna h: backwards */
+    animation-fill-mode: forwards;
+}
+
+/* Box par jab hover krenge toh uske andar ka item
+jo hoga uspr css apply kregi yeh wali */
+/* .box:hover .item {
+    width: 100%;
+} */
+
+/* Animations keyframes */
+/* @keyframes loader {
+    from{
+        width: 0%;
+    }
+
+    to{
+        width: 100%;
+    }
+} */
+
+@keyframes loader {
+    0%{
+        width: 0%;
+    }
+
+    40%{
+        width: 30%;
+    }
+
+    70%{
+        width: 35%;
+    }
+
+    100%{
+        width: 100%;
+    }
+}
