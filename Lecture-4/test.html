@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>CSS Grid auto-fit Demo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+    }
+
+    .box {
+      background: #4f46e5;
+      color: white;
+      padding: 30px;
+      text-align: center;
+      font-size: 18px;
+      border-radius: 8px;
+    }
+  </style>
+
+
+</head>
+
+<body>
+
+  <h2>Responsive Grid (auto-fit + minmax)</h2>
+
+  <div class="container">
+    <div class="box">Item 1</div>
+    <div class="box">Item 2</div>
+    <div class="box">Item 3</div>
+    <div class="box">Item 4</div>
+    <div class="box">Item 5</div>
+    <div class="box">Item 6</div>
+  </div>
+
+
+  <script>
+document.body.innerHTML = `
+  <p>A</p>
+  <p>B</p>
+`;
+
+const p = document.querySelectorAll("p");
+document.body.innerHTML = "";
+
+console.log(p.length);
+
+
+  </script>
+</body>
+
+</html>
