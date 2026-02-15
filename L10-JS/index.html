@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Document</title>
+</head>
+
+<body>
+
+    <h1>Hello World</h1>
+    <button>Click Me</button>
+    <script>
+        // Synchronous Wait it will block the JS thread and because of this website wont work.
+        function waitASec() {
+            let t = new Date().getTime();
+            while (new Date().getTime() - t < 1000) {
+
+            }
+        }
+
+        function waitNSec(n) {
+            for (let i = 0; i < n; i++) waitASec();
+        }
+
+        waitNSec(5);
+
+    </script>
+</body>
+
+</html>
