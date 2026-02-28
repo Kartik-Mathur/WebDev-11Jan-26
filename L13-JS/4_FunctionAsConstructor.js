@@ -11,3 +11,5 @@ Person.prototype.printDetails = function () {
 let p = new Person("Ankit", 19);
 // console.log(p)
 p.printDetails()
+
+console.log(p.__proto__ == Person.prototype)
