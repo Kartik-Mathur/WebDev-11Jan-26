@@ -28,3 +28,6 @@ console.log("\\t == \\n", '\n' == '\t');
 console.log("+[1,2]", +[1, 2]); // NaN
 console.log("+[[]]", +[[]]); // 0
 console.log("+[[], []]", +[[], []]); // NaN
+
+
+

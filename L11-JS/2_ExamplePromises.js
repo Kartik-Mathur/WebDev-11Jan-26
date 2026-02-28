@@ -1,17 +1,26 @@
-setTimeout(() => {
-    console.log("Hi From setTimeout");
-}, 0)
+function outer() {
+    var x = 10;
 
-let p = new Promise((res, rej) => {
-    res("Hey! i am resolved");
-})
+    return function inner(y) {
+        x += y;
 
-p
-    .then((msg) => {
-        console.log(msg)
-    })
-    .catch(err => {
-        console.log(err)
-    })
+        return function deepest(z) {
+            console.log(x, y, z);
+            x += z;
+        };
+    };
+}
 
-console.log("Hello World");
+const a = outer();
+const b = a(5);
+const c = a(2);
+
+b(1);
+c(3);
+a(4)(2);
+
+
+
+
+
+
