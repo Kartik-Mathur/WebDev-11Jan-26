@@ -11,11 +11,11 @@ let url = 'https://jsonplaceholder.typicode.com/todos/';
 function updateTodos(data) {
     // Always empty the content of todosList
     todosList.innerText = '';
-    
+
     for (let i = 0; i < data.length; i++) {
         // console.log(data[i]);
         const { id, userId, title, completed } = data[i];
-        console.log(id, userId, completed, title);
+        // console.log(id, userId, completed, title);
         // 1. Create element
         let li = document.createElement('li');
         li.innerText = `Title: ${title}, 
@@ -27,15 +27,20 @@ function updateTodos(data) {
     }
 }
 
-fetch(url)
-    .then((x) => {
-        return x.json();
+// console.log(axios)
+/*
+axios.get(url)
+    .then((res)=>{
+        console.log(res.data);
     })
-    .then(function (data) {
-        // Show this data on the browser
+ */
+
+axios.get(url)
+    .then(({ data }) => {
         // console.log(data)
         updateTodos(data);
     })
     .catch(err => {
-        return err
+        console.log(err)
     })
+
