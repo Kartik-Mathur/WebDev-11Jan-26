@@ -1,0 +1,44 @@
+{
+    "coord": {
+        "lon": 77.2219,
+        "lat": 28.6517
+    },
+    "weather": [
+        {
+            "id": 800,
+            "main": "Clear",
+            "description": "clear sky",
+            "icon": "01d"
+        }
+    ],
+    "base": "stations",
+    "main": {
+        "temp": 307,
+        "feels_like": 304.48,
+        "temp_min": 307,
+        "temp_max": 307,
+        "pressure": 1008,
+        "humidity": 10,
+        "sea_level": 1008,
+        "grnd_level": 983
+    },
+    "visibility": 10000,
+    "wind": {
+        "speed": 1.09,
+        "deg": 160,
+        "gust": 1.82
+    },
+    "clouds": {
+        "all": 0
+    },
+    "dt": 1772885469,
+    "sys": {
+        "country": "IN",
+        "sunrise": 1772845824,
+        "sunset": 1772888062
+    },
+    "timezone": 19800,
+    "id": 1273840,
+    "name": "Connaught Place",
+    "cod": 200
+}

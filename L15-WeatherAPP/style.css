@@ -1,0 +1,83 @@
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#4facfe,#00f2fe);
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+.weather-card{
+    width:320px;
+    padding:25px;
+    border-radius:16px;
+    background:white;
+    box-shadow:0 10px 30px rgba(0,0,0,0.2);
+    text-align:center;
+}
+
+/* Search section */
+.weather-card input{
+    width:65%;
+    padding:10px;
+    border-radius:8px;
+    border:1px solid #ccc;
+    outline:none;
+    font-size:14px;
+}
+
+.weather-card button{
+    padding:10px 12px;
+    border:none;
+    border-radius:8px;
+    background:#4facfe;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+    margin-left:5px;
+}
+
+.weather-card button:hover{
+    background:#2f8dfc;
+}
+
+/* Location */
+.location{
+    font-size:22px;
+    font-weight:bold;
+    margin-top:18px;
+    color:#333;
+}
+
+/* Temperature */
+.temp{
+    font-size:42px;
+    font-weight:bold;
+    margin:10px 0;
+    color:#222;
+}
+
+/* Weather type */
+.weather-main{
+    font-size:20px;
+    color:#444;
+}
+
+.description{
+    font-size:15px;
+    color:#777;
+}
+
+/* Extra info */
+.extra{
+    margin-top:20px;
+    display:flex;
+    justify-content:space-between;
+    padding:10px 20px;
+}
+
+.label{
+    font-weight:bold;
+    color:#333;
+}
