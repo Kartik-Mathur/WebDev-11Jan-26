@@ -7,10 +7,10 @@ async function fetchTodos() {
     return allTodos;
 }
 
-function filterTodos(allTodos, status) {
-    let data = allTodos.filter(t => t.completed == status);
-    return data;
-}
+// function filterTodos(allTodos, status) {
+//     let data = allTodos.filter(t => t.completed == status);
+//     return data;
+// }
 
 function printTodos(allTodos) {
     /*
@@ -19,7 +19,7 @@ function printTodos(allTodos) {
         title: "delectus aut autem"
         userId: 1
     */
-   todoList.innerHTML = "";
+    todoList.innerHTML = "";
 
     allTodos.forEach(td => {
         let li = document.createElement('li');
@@ -54,12 +54,13 @@ document.querySelector('#all').addEventListener('click', ev => {
 
 document.querySelector('#pending').addEventListener('click', ev => {
     console.log("Pending Tasks")
-    let data = filterTodos(allTodos, false);
+    let data = allTodos.filter(t => t.completed == false);
     console.log(data);
     printTodos(data);
 })
 
 document.querySelector('#completed').addEventListener('click', ev => {
-    let data = filterTodos(allTodos, true);
+    // let data = filterTodos(allTodos, true);
+    let data = allTodos.filter(t => t.completed == true);
     printTodos(data);
 })
