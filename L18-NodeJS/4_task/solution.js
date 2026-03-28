@@ -4,7 +4,6 @@ const path = require('path');
 let data1 = fs.readFileSync(path.join(__dirname, 'a.txt'), { encoding: 'utf-8' });
 let data2 = fs.readFileSync(path.join(__dirname, 'b.txt'), { encoding: 'utf-8' });
 
-// console.log(data1)
 // console.log(data2)
 data1 = data1.split("\n");
 data2 = data2.split("\n");

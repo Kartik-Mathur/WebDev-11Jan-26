@@ -1,0 +1,23 @@
+let obj = {a:1}
+undefined
+let obj2 = {a: obj.a}
+undefined
+obj
+{a: 1}
+obj2
+{a: 1}
+obj2.a = 100;
+100
+obj 
+{a: 1}
+
+
+// -------------
+let obj = {a:1}
+undefined
+let obj2 = obj
+undefined
+obj2.a = 100;
+100
+obj
+{a: 100}
