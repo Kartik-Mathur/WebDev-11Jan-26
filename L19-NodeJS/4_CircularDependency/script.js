@@ -4,4 +4,4 @@ const lib2 = require('./lib2');
 // console.log(lib1);
 // console.log(lib2);
 
-console.log(lib1.lib2.sub(10,5));
+console.log(lib1.lib2.lib1.lib2.lib1.lib2.sub(10,5));
