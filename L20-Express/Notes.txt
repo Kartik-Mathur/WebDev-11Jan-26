@@ -1,0 +1,48 @@
+1. Setting up expressJS
+    - Express is installed via npm or yarn
+    - npm i express or npm install express
+        - node_modules (Actual Code) 
+        - package-lock.json
+        - package.json 
+2. Installing node_modules via package.json
+    - npm i or npm install 
+3. create app.js and write
+    ```
+        const express = require('express');
+        const app = express();
+
+        app.get('/', (req,res)=>{
+            
+            res.send("Hello World");
+        })
+
+
+        app.listen(4444, function () {
+            console.log("Express Server Started at Port Number ", 4444);
+        })
+    ```
+4. start the server from terminal
+    - node app.js
+5. Open postman to send the request
+6. Update the Code
+```
+
+const express = require('express');
+const app = express();
+
+app.get('/', (req,res)=>{
+    res.send("Hello World");
+})
+
+app.get('/hello',(req,res)=>{
+    res.send("Hiii! Welcome");
+})
+
+app.listen(4444, function () {
+    console.log("Express Server Started at Port Number ", 4444);
+})
+```
+7. Now to restart the app on its own so that new code also starts to work we use package 'nodemon'
+    - npm i -g nodemon 
+8. To start app using nodemon  
+    - nodemon app.js
