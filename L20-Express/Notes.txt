@@ -46,3 +46,6 @@ app.listen(4444, function () {
     - npm i -g nodemon 
 8. To start app using nodemon  
     - nodemon app.js
+9. Learning to send data to server 
+    - query parameter
+    - params
