@@ -42,27 +42,48 @@ class Todos {
         todos = JSON.parse(todos);
         // 2. Find the index jiske object ka data update hoga
         let i = todos.findIndex(t => t.id == todo.id);
-        console.log(i)
+
         if (i != -1) {
             todos[i].name = todo.name || todos[i].name
             todos[i].description = todo.description || todos[i].description
-            if(typeof(todo.completed) !== undefined){
+            if (typeof (todo.completed) !== undefined) {
                 todos[i].completed = todo.completed
             }
             await fs.writeFile(filePath, JSON.stringify(todos));
         }
     }
 
-    increasePriority(id) { }
+    async increasePriority(id) {
+        // 1. Read all the todos
+        let todos = await fs.readFile(filePath);
+        todos = JSON.parse(todos);
 
-    decreasePriority(id) { }
+        // Find the index jiski priority increase krni hai
+        let i = todos.findIndex(t => t.id == id);
+        if (i != -1 && i != 0) {
+            [todos[i], todos[i - 1]] = [todos[i - 1], todos[i]]
+            await fs.writeFile(filePath, JSON.stringify(todos));
+        }
+    }
+
+    async decreasePriority(id) {
+        // 1. Read all the todos
+        let todos = await fs.readFile(filePath);
+        todos = JSON.parse(todos);
+        let i = todos.findIndex(t => t.id == id);
+        if (i != -1 && i != (todos.length - 1)) {
+            [todos[i], todos[i + 1]] = [todos[i + 1], todos[i]]
+            await fs.writeFile(filePath, JSON.stringify(todos));
+        }
+    }
 };
 
 let task = new Todos();
-// task.addTodo({ name: 'basketball', description: "Play for fun" });
+// task.addTodo({ name: 'Cricket', description: "Play for fun" });
 // task.deleteTodo(1775911607717);
-task.updateTodo({
-    id: 1775912379693,
-    completed: false,
-    description: 'Basketball is fun-1'
-})
+// task.updateTodo({
+//     id: 1775912379693,
+//     completed: false,
+//     description: 'Basketball is fun-1'
+// })
+task.decreasePriority(1775913427384)
