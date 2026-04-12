@@ -50,14 +50,14 @@ app.patch('/todos', async (req, res) => {
 
 // To increase priority of a todo
 app.get('/increase-priority', async (req, res) => {
-    const { id } = req.body;
+    const { id } = req.query;
     await Todos.increasePriority(id);
     res.redirect('/todos');
 })
 
 // To decrease priority of a todo
 app.get('/decrease-priority', async (req, res) => {
-    const { id } = req.body;
+    const { id } = req.query;
     await Todos.decreasePriority(id);
     res.redirect('/todos');
 })

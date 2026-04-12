@@ -23,6 +23,31 @@ todoForm.addEventListener('submit', async (ev) => {
     refreshTodos(allTodos);
 })
 
+async function increasePriority(id) {
+    console.log("Increase", id)
+    let response = await axios.get(`/increase-priority?id=${id}`);
+    let allTodos = response.data;
+    refreshTodos(allTodos)
+}
+
+async function decreasePriority(id) {
+    console.log("Decrease", id)
+    let response = await axios.get(`/decrease-priority?id=${id}`);
+    let allTodos = response.data;
+    refreshTodos(allTodos)
+}
+
+async function deleteTodo(id) {
+    let response = await axios.delete(`/todos`, {
+        data: {
+            id
+        }
+    });
+    console.log(response)
+    // let allTodos = response.data;
+    // refreshTodos(allTodos)
+}
+
 function refreshTodos(todos) {
     taskList.innerHTML = '';
 
@@ -30,10 +55,12 @@ function refreshTodos(todos) {
         let li = document.createElement('li');
         li.innerHTML = `
         <div>
+            <input type="checkbox" ${item.completed ? "checked" : ""}>
             Name: ${item.name}
             Description: ${item.description}
-            id: ${item.id}
-            completed: ${item.completed ? "Completed" : "Pending"}
+            <button onclick=increasePriority(${item.id}) >⬆️</button>
+            <button onclick=decreasePriority(${item.id}) >⬇️</button>
+            <button onclick=deleteTodo(${item.id}) >❌</button>
         </div>
         `
         taskList.appendChild(li);
@@ -41,7 +68,7 @@ function refreshTodos(todos) {
 }
 
 
-async function loadInitialTodos(){
+async function loadInitialTodos() {
     let response = await axios.get('/todos');
     let allTodos = response.data;
     refreshTodos(allTodos);
