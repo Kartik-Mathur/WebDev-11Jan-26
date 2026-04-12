@@ -5,7 +5,14 @@ let filePath = path.join(__dirname, 'todos.json');
 
 class Todos {
 
-    async addTodo(todo) {
+    static async getTodos() {
+        let todos = await fs.readFile(filePath);
+        todos = JSON.parse(todos);
+
+        return todos;
+    }
+
+    static async addTodo(todo) {
         const { name, description } = todo;
         // 1. Read the existing todos
         let todos = await fs.readFile(filePath);
@@ -21,12 +28,13 @@ class Todos {
         await fs.writeFile(filePath, JSON.stringify(todos));
     }
 
-    async deleteTodo(id) {
+    static async deleteTodo(id) {
         // 1. Read all the existing todos
         let todos = await fs.readFile(filePath);
         todos = JSON.parse(todos);
         // 2. Remove the todo that is equal to
         // id user want to delete
+        id = Number(id); // Convert string to num
         let newTodos = todos.filter(t => {
             if (t.id === id) return false;
             return true;
@@ -35,7 +43,7 @@ class Todos {
         await fs.writeFile(filePath, JSON.stringify(newTodos));
     }
 
-    async updateTodo(todo) {
+    static async updateTodo(todo) {
         console.log(todo)
         // 1. Read all the todos
         let todos = await fs.readFile(filePath);
@@ -46,14 +54,11 @@ class Todos {
         if (i != -1) {
             todos[i].name = todo.name || todos[i].name
             todos[i].description = todo.description || todos[i].description
-            if (typeof (todo.completed) !== undefined) {
-                todos[i].completed = todo.completed
-            }
             await fs.writeFile(filePath, JSON.stringify(todos));
         }
     }
 
-    async increasePriority(id) {
+    static async increasePriority(id) {
         // 1. Read all the todos
         let todos = await fs.readFile(filePath);
         todos = JSON.parse(todos);
@@ -66,7 +71,7 @@ class Todos {
         }
     }
 
-    async decreasePriority(id) {
+    static async decreasePriority(id) {
         // 1. Read all the todos
         let todos = await fs.readFile(filePath);
         todos = JSON.parse(todos);
@@ -77,3 +82,6 @@ class Todos {
         }
     }
 };
+
+
+module.exports = Todos;
