@@ -38,14 +38,13 @@ async function decreasePriority(id) {
 }
 
 async function deleteTodo(id) {
-    let response = await axios.delete(`/todos`, {
+    console.log("DELETE ID ",id);
+    await axios.delete(`/todos`, {
         data: {
             id
         }
     });
-    console.log(response)
-    // let allTodos = response.data;
-    // refreshTodos(allTodos)
+    // loadInitialTodos();
 }
 
 function refreshTodos(todos) {

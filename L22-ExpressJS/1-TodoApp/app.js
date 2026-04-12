@@ -30,7 +30,7 @@ app.post('/todos', async (req, res) => {
 // To delete a todo
 app.delete('/todos', async (req, res) => {
     const { id } = req.body;
-
+    console.log(id);
     await Todos.deleteTodo(id);
     res.redirect('/todos');
 })
@@ -51,6 +51,7 @@ app.patch('/todos', async (req, res) => {
 // To increase priority of a todo
 app.get('/increase-priority', async (req, res) => {
     const { id } = req.query;
+    console.log(id)
     await Todos.increasePriority(id);
     res.redirect('/todos');
 })
