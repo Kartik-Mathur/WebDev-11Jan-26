@@ -4,13 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
-
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <h1>Todo App</h1>
 
+    <form id="todoform" action="/todos" method="POST">
+        <input type="text" name="name" placeholder="Enter Todo Name" id="todoname">
+        <input type="text" name="description" placeholder="Enter Todo Description" id="tododescription">
+
+        <button type="submit">Add Todo</button>
+    </form>
+
+    <ul class="taskList"></ul>
 
     <script src="./script.js"></script>
 </body>

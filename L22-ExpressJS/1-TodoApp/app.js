@@ -4,7 +4,10 @@ const Todos = require('./lib/Todos');
 const app = express();
 const PORT = 4444;
 
+// To use POST via POSTMAN/Browser(FORM TAG)
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json()); // To use axios
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 // To return all the todos
