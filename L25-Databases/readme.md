@@ -122,7 +122,8 @@ db.mentors.aggregate([
     },
     {
         $project : {
-            name: 1
+            name: 1,
+            duration: 1
         }
     },
     {
