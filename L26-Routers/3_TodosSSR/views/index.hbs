@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App - SSR</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <div class="todo-container">
+        <h1>Todo App</h1>
+
+        <form class="todo-input" action="/todos" method="POST">
+            <input type="text" name="name" placeholder="Enter a task">
+            <button type="submit">Add</button>
+        </form>
+
+        <ul class="todo-list">
+            {{#each todos as |t|}}
+            <li>
+                {{t.name}}
+                <form action="/increase/{{t.id}}">
+                    <button class="increase-btn">+</button>
+                </form>
+                <form action="/decrease/{{t.id}}">
+                    <button class="decrease-btn">-</button>
+                </form>
+                <form action="/delete-todos/{{t.id}}">
+                <button class="delete-btn">Delete</button>
+                </form> 
+            </li>
+            {{/each}}
+        </ul>
+    </div>
+
+
+    <script src="./script.js"></script>
+
+</body>
+
+</html>
