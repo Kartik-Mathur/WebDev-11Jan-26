@@ -1,0 +1,18 @@
+const path = require('path');
+const express = require('express');
+const app = express();
+const PORT = 4444;
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
+app.set('view engine','hbs')
+
+// Aise code likhna matlab jindgi narak
+app.get('/login', (req, res) => {
+    // templating engine ke saath views folder ke andar direct file ka path dedo
+    res.render('index');
+})
+
+app.listen(PORT, () => {
+    console.log(`http://localhost:` + PORT);
+});
