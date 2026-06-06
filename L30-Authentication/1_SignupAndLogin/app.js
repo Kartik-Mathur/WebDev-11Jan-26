@@ -7,6 +7,8 @@ app.set('view engine','hbs');
 app.use(express.urlencoded({extended:true}));
 app.use(express.static(path.join(__dirname,'public')));
 
+app.use('/auth', require('./routers/auth.routes'));
+// app.use('/user',);
 
 app.listen(PORT,()=>{
     console.log(`http://localhost:`+PORT);
