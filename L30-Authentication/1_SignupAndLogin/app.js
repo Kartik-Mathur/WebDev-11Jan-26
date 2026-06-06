@@ -7,6 +7,10 @@ app.set('view engine','hbs');
 app.use(express.urlencoded({extended:true}));
 app.use(express.static(path.join(__dirname,'public')));
 
+// app.get('/',(req,res)=>{
+//     res.render('login');
+// })
+
 app.use('/auth', require('./routers/auth.routes'));
 // app.use('/user',);
 

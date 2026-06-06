@@ -13,7 +13,14 @@ router.get('/signup',(req,res,next)=>{
 // This will let user to login
 // router.post('/login',);
 // This will let user to Signup
-// router.post('/signup',);
+router.post('/signup',(req,res,next)=>{
+    const {username, password} = req.body;
+
+    if(!username || !password) 
+        return res.send('Enter username and password both');
+
+    
+});
 
 
 module.exports=router;
