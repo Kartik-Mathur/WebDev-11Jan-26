@@ -10,9 +10,9 @@
 <body>
     Welcome to the dashboard: {{username}}
 
-    <a href="/auth/logout">
-        <button>Logout</button>
-    </a>
+    <form action="/logout" method="POST">
+        <button type="submit">Logout</button>
+    </form>
 </body>
 
 </html>
