@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f6f9;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            background: #1e293b;
+            color: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .user-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .profile-img {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #fff;
+        }
+
+        .username {
+            font-weight: 600;
+        }
+
+        .logout-btn {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: #dc2626;
+        }
+
+        /* Content */
+        .container {
+            padding: 40px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="logo">Dashboard</div>
+
+        <div class="user-section">
+            <!-- Replace with user's image URL -->
+            <img src="{{profileImage}}" alt="Profile" class="profile-img">
+
+            <span class="username">{{username}}</span>
+
+            <form action="/logout" method="POST">
+                <button type="submit" class="logout-btn">Logout</button>
+            </form>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="card">
+            <h2>Welcome, {{username}} 👋</h2>
+            <p>You have successfully logged in to your dashboard.</p>
+        </div>
+    </div>
+
+</body>
+
+</html>
