@@ -13,8 +13,12 @@ const App = () => {
     getTodos();
   }, []);
 
-  function deleteHandler(id){
-    
+  async function deleteHandler(id) {
+    let { data } = await axios.delete("http://localhost:4444/todos", {
+      data: { id },
+    });
+
+    setTodos(data);
   }
 
   return (
@@ -23,7 +27,7 @@ const App = () => {
       {todos.map((item, indx) => (
         <li key={indx}>
           {item.name} - {item.description}
-          <button onClick={()=>deleteHandler(item._id)}>Delete</button>
+          <button onClick={() => deleteHandler(item._id)}>Delete</button>
         </li>
       ))}
     </div>
