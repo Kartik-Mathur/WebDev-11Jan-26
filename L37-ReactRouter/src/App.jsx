@@ -29,11 +29,23 @@ const App = () => {
   return (
     <div>
       <Navbar />
-
+      
       <Routes>
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/faq" element={<Faq />} />
+
+        <Route path="/faq" element={<Faq />}>
+          
+          <Route path="team" element={<div>Hello About Team</div>} />
+          
+          <Route
+            path="company"
+            element={<div>This is info about company</div>}
+          />
+          
+          <Route path="courses" element={<div>Courses Details</div>} />
+        
+        </Route>
       </Routes>
     </div>
   );
