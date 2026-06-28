@@ -6,11 +6,15 @@ const session = require('express-session')
 app.use(session({
   secret: 'akdsbb bdbasbaajhvejbfvhesjvfshjva mvesvvsecerjvsdsdvfkhsjfv',
   resave: false,
-  saveUninitialized: true
+  saveUninitialized: false
 }))
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.get('/random',(req,res)=>{
+    res.send("Hey Random");
+})
 
 app.get('/profile', (req, res) => {
     if(!req.session.details){

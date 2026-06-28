@@ -1,9 +1,10 @@
-let taskList = document.querySelector('.todo-list');
+// let taskList = document.querySelector('.todo-list');
 
-let li = document.createElement('li');
-li.innerHTML = `<li>
-        Learn HTML
-        <button class="delete-btn">Delete</button>
-      </li>`
+// let li = document.createElement('li');
+// taskList.innerHTML = '';
+// li.innerHTML = `<li>
+//         Learn HTML
+//         <button class="delete-btn">Delete</button>
+//       </li>`
 
-taskList.appendChild(li);
+// taskList.appendChild(li);

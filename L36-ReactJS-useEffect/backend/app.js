@@ -73,8 +73,34 @@ app.get('/increase-priority',async (req,res)=>{
     res.redirect('/todos');
 
 })
-app.get('/decrease-priority',(req,res)=>{
-    // const {id} = req.query;
+app.get('/decrease-priority',async (req,res)=>{
+    const {currentId, nextId} = req.query;
+
+    let currentItem = await todoModel.findOne({
+        _id: currentId
+    })
+
+    let nextItem = await todoModel.findOne({
+        _id: nextId
+    })
+    console.log(currentItem)
+    console.log(nextItem);
+
+    let tempItem = {};
+    tempItem.name = currentItem.name;
+    tempItem.description = currentItem.description;
+    console.log(tempItem)
+    
+
+    currentItem.name = nextItem.name;
+    currentItem.description = nextItem.description;
+    await currentItem.save();
+
+    nextItem.name = tempItem.name;
+    nextItem.description = tempItem.description;
+    await nextItem.save();
+
+    res.redirect('/todos');
 
 })
 
