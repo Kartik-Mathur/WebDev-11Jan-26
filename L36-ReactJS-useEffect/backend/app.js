@@ -42,6 +42,42 @@ app.delete('/todos', async (req, res) => {
     res.status(200).json({ allTodos });
 })
 
+
+app.get('/increase-priority',async (req,res)=>{
+    const {currentId, prevId} = req.query;
+
+    let currentItem = await todoModel.findOne({
+        _id: currentId
+    })
+
+    let prevItem = await todoModel.findOne({
+        _id: prevId
+    })
+    console.log(currentItem)
+    console.log(prevItem);
+
+    let tempItem = {};
+    tempItem.name = currentItem.name;
+    tempItem.description = currentItem.description;
+    console.log(tempItem)
+    
+
+    currentItem.name = prevItem.name;
+    currentItem.description = prevItem.description;
+    await currentItem.save();
+
+    prevItem.name = tempItem.name;
+    prevItem.description = tempItem.description;
+    await prevItem.save();
+
+    res.redirect('/todos');
+
+})
+app.get('/decrease-priority',(req,res)=>{
+    // const {id} = req.query;
+
+})
+
 mongoose.connect('mongodb://localhost:27017/todos')
     .then(() => {
         app.listen(PORT, () => {
