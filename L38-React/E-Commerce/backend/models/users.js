@@ -1,5 +1,8 @@
 const { default: mongoose } = require("mongoose");
 const { randomUUID } = require('crypto');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+
 const cartSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -59,5 +62,11 @@ const userSchema = new mongoose.Schema({
     },
     cart: [cartSchema]
 })
+
+userSchema.pre('save',function(){
+    const hash = bcrypt.hashSync(this.password, saltRounds);
+    this.password = hash;
+})
+
 
 module.exports = new mongoose.model('Users', userSchema);
