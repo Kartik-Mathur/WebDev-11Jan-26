@@ -1,4 +1,5 @@
 const productsModel = require("../models/products");
+const seedProducts = require("../seed/products");
 
 module.exports.addProduct = async (req, res, next) => {
     const {
@@ -125,8 +126,8 @@ module.exports.getProduct = async (req, res, next) => {
 
 
         if (!product) return res.status(400).json({
-                message: "Product doesn't exist"
-            })
+            message: "Product doesn't exist"
+        })
 
         res.status(200).json({
             product
@@ -138,4 +139,34 @@ module.exports.getProduct = async (req, res, next) => {
         })
     }
 
+}
+
+module.exports.addBatchData = async (req, res, next) => {
+    let seedData = seedProducts;
+    seedData = seedData.map(item => {
+        return {
+            ...item,
+            adminId: req.user._id
+        }
+    });
+    
+    if (seedData.length == 0) {
+        return res.status(400).json({
+            message: "add data to seed"
+        })
+    }
+
+    try {
+        let allProducts = await productsModel.insertMany(seedData)
+
+        res.status(200).json({
+            message: "Seed Products added successfully",
+            products: allProducts
+        })
+    } catch (error) {
+        return res.status(500).status({
+            message: error.message,
+            error
+        })
+    }
 }

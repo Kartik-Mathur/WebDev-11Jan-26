@@ -22,6 +22,10 @@ const productsSchema = new mongoose.Schema({
     adminId: {
         type: mongoose.Types.ObjectId,
         ref: "Users"
+    },
+    category:{
+        type: String,
+        lowercase: true
     }
 })
 
