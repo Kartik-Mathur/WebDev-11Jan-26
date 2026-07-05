@@ -196,3 +196,15 @@
 
     module.exports = router;
     ```
+
+
+--------------------------------------------------------------------------------
+Let's talk about user login
+    /login par post request bhejni padegi
+        - body{username and password}
+    - Check karo user valid hai and uska password match hota hai
+    - JWT token banao and user ko send kardo
+    - Dobara request jab aaegi toh check karo token ke through user valid h
+        - if user is valid usse req.user mei add kardo so that user is
+          available through out our application via req.user
+
