@@ -4,9 +4,9 @@ const usersModel = require("../models/users");
 
 const isLoggedInAsAdmin = async (req, res, next) => {
     let token = getTokenThroughAuthenticationHeader(req, res);
-
+    
     var decoded = jwt.verify(token, process.env.JWT_SECRET);
-
+    
     const { username, email } = decoded;
     if (!username || !email) {
         return res.status(400).json({
