@@ -12,7 +12,7 @@ const cartSchema = new mongoose.Schema({
         type: Number,
         default: 1,
     },
-    price: Number,
+    // price: Number, // Yeh yaha nhi exist kar skta
     productId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Products"

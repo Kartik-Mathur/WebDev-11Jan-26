@@ -3,13 +3,18 @@ const express = require('express');
 const {
     getProducts,
     getCategoryProducts,
-    getUserDetails
+    getUserDetails,
+    getProductById,
+    addToCart,
+    getCart
 } = require('../controllers/app.controller');
 const router = express.Router();
 
-// router.get('/add-to-cart',);
+
+router.get('/add-to-cart/:id', addToCart);
+router.get('/get-cart', getCart);
 // router.get('/buy-cart',);
-// router.get('/get-product/:id',);
+router.get('/get-product/:id', getProductById);
 router.get('/get-products/:category', getCategoryProducts);
 router.get('/get-products/', getProducts);
 router.get('/get-user-details', getUserDetails);
