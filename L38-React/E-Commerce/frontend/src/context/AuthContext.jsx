@@ -49,6 +49,10 @@ const AuthContext = ({ children }) => {
 
     setToken(null);
     setUser(null);
+
+    navigate("/login", {
+      replace: true,
+    });
   }
 
   return (
