@@ -8,7 +8,6 @@ const router = express.Router();
 router.post('/create', createUser);
 router.post('/signup', createUser);
 
-
 router.post('/login', loginUser);
 
 
