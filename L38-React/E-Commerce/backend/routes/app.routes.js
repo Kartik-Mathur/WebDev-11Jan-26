@@ -6,13 +6,15 @@ const {
     getUserDetails,
     getProductById,
     addToCart,
-    getCart
+    getCart,
+    getCategories
 } = require('../controllers/app.controller');
 const router = express.Router();
 
 
 router.get('/add-to-cart/:id', addToCart);
 router.get('/get-cart', getCart);
+router.get('/get-categories', getCategories);
 // router.get('/buy-cart',);
 router.get('/get-product/:id', getProductById);
 router.get('/get-products/:category', getCategoryProducts);

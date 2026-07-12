@@ -23,7 +23,7 @@ const productsSchema = new mongoose.Schema({
         type: mongoose.Types.ObjectId,
         ref: "Users"
     },
-    category:{
+    category: {
         type: String,
         lowercase: true
     }

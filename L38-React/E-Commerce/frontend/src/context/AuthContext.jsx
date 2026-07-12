@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
 import { createContext } from "react";
 import { useNavigate } from "react-router";
@@ -70,5 +70,12 @@ const AuthContext = ({ children }) => {
   );
 };
 
+
+function useAuth(){
+  const data = useContext(authorisationContext);
+
+  return data;
+}
 export default AuthContext;
 export { authorisationContext };
+export {useAuth};

@@ -1,12 +1,21 @@
 const productsModel = require("../models/products")
 
+module.exports.getCategories = async (req, res, next) => {
+
+}
+
+let myAllProducts = [];
 module.exports.getProducts = async function (req, res, next) {
     try {
-        let allProducts = await productsModel.find({});
+        if (myAllProducts.length == 0) {
+            console.log("Fetching data from DB");
+            let allProducts = await productsModel.find({});
+            myAllProducts = allProducts;
+        }
 
         res.status(200).send({
             message: "Products fetched successfully",
-            products: allProducts
+            products: myAllProducts
         })
     } catch (error) {
         return res.status(500).send({

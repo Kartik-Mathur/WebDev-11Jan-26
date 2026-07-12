@@ -1,21 +1,34 @@
-import React from "react";
-import { useContext } from "react";
+import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router";
 import { authorisationContext } from "../context/AuthContext";
+import "./Navbar.css";
 
 const Navbar = () => {
   const { logout, isAuthenticated } = useContext(authorisationContext);
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+
   return (
-    <nav>
-      {isAuthenticated ? (
-        <button onClick={logout}>Logout</button>
-      ) : (
-        <>
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Signup</Link>
-        </>
-      )}
+    <nav className="navbar">
+      <div className="navbar-logo">
+        <Link to="/">MyApp</Link>
+      </div>
+
+      <div className="navbar-links">
+        {isAuthenticated ? (
+          <button className="logout-btn" onClick={logout}>
+            Logout
+          </button>
+        ) : (
+          <>
+            <Link className="nav-link" to="/login">
+              Login
+            </Link>
+            <Link className="nav-link signup-link" to="/signup">
+              Signup
+            </Link>
+          </>
+        )}
+      </div>
     </nav>
   );
 };
