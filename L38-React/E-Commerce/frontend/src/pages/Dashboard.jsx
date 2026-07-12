@@ -9,6 +9,7 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     try {
+      setLoading(true);
       async function getProducts() {
         let { data } = await api.get("/app/get-products/");
         console.log(data.products);
@@ -31,6 +32,7 @@ const Dashboard = () => {
 
   async function categoryHandler(c) {
     try {
+      setLoading(true);
       if (c == "all") {
         let { data } = await api.get(`/app/get-products/`);
         setProducts(data.products);

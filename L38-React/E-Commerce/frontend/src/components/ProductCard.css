@@ -1,5 +1,7 @@
 .product-card {
     width: 300px;
+    display: flex;
+    flex-direction: column;
     background: #fff;
     border-radius: 12px;
     overflow: hidden;
@@ -19,6 +21,9 @@
 }
 
 .product-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
     padding: 16px;
 }
 
@@ -30,6 +35,7 @@
     border-radius: 20px;
     font-size: 12px;
     margin-bottom: 10px;
+    width: fit-content;
 }
 
 .product-name {
@@ -42,19 +48,34 @@
     font-size: 15px;
     color: #666;
     line-height: 1.5;
-    height: 66px;
-    overflow: hidden;
+    flex: 1;
 }
 
 .product-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 20px;
+    margin-top: auto;
 }
 
 .product-price {
+    display: block;
     font-size: 24px;
     font-weight: bold;
     color: #16a34a;
+    margin-bottom: 15px;
+}
+
+.add-cart-btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: #2563eb;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.add-cart-btn:hover {
+    background: #1d4ed8;
 }

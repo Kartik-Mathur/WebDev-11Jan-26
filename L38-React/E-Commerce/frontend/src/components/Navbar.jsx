@@ -1,12 +1,14 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router";
-import { authorisationContext } from "../context/AuthContext";
+import { FaShoppingCart } from "react-icons/fa";
+import { authorisationContext, useAuth } from "../context/AuthContext";
 import "./Navbar.css";
+import api from "../api";
 
 const Navbar = () => {
   const { logout, isAuthenticated } = useContext(authorisationContext);
   const navigate = useNavigate();
-
+  const { cart } = useAuth();
   return (
     <nav className="navbar">
       <div className="navbar-logo">
@@ -15,14 +17,28 @@ const Navbar = () => {
 
       <div className="navbar-links">
         {isAuthenticated ? (
-          <button className="logout-btn" onClick={logout}>
-            Logout
-          </button>
+          <>
+            <Link className="cart-link" to="/cart">
+              <div className="cart-container">
+                <FaShoppingCart className="cart-icon" />
+                {cart.length > 0 ? (
+                  <span className="cart-count">{cart.length}</span>
+                ) : (
+                  ""
+                )}
+              </div>
+            </Link>
+
+            <button className="logout-btn" onClick={logout}>
+              Logout
+            </button>
+          </>
         ) : (
           <>
             <Link className="nav-link" to="/login">
               Login
             </Link>
+
             <Link className="nav-link signup-link" to="/signup">
               Signup
             </Link>
