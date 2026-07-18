@@ -16,6 +16,7 @@ module.exports.loginUser = async (req, res, next) => {
         })
     }
 
+    console.log(username, password)
     try {
         let user = await usersModel.findOne({
             username
@@ -26,8 +27,10 @@ module.exports.loginUser = async (req, res, next) => {
                 message: "Please enter correct username"
             })
         }
+        console.log(user);
 
         let passwordMatched = bcrypt.compareSync(password, user.password); // true
+        console.log(passwordMatched);
         if (!passwordMatched) {
             return res.status(400).json({
                 message: "Incorrect password"
@@ -46,7 +49,8 @@ module.exports.loginUser = async (req, res, next) => {
             token,
             user: {
                 username: user.username,
-                email: user.email
+                email: user.email,
+                cart: user.cart
             }
         })
     } catch (error) {
@@ -86,7 +90,7 @@ module.exports.createUser = async (req, res, next) => {
             });
         }
 
-    
+
         let user = await usersModel.create({
             username,
             password,

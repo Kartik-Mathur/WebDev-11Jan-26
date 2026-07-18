@@ -16,6 +16,9 @@ const cartSchema = new mongoose.Schema({
     productId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Products"
+    },
+    imageUrl: {
+        type: String
     }
 });
 
@@ -63,7 +66,7 @@ const userSchema = new mongoose.Schema({
     cart: [cartSchema]
 })
 
-userSchema.pre('save',function(){
+userSchema.pre('save', function () {
     const hash = bcrypt.hashSync(this.password, saltRounds);
     this.password = hash;
 })

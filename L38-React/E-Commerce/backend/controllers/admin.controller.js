@@ -6,7 +6,8 @@ module.exports.addProduct = async (req, res, next) => {
         name,
         price,
         description,
-        imageUrl
+        imageUrl,
+        category
     } = req.body;
 
     if (!name || !price) {
@@ -19,6 +20,7 @@ module.exports.addProduct = async (req, res, next) => {
         let product = await productsModel.create({
             name,
             price,
+            category,
             description: description || "NA",
             imageUrl: imageUrl || "",
             rating: 0,
@@ -78,6 +80,13 @@ module.exports.updateProduct = async (req, res, next) => {
         let product = await productsModel.findOne({
             _id: id
         })
+        // console.log(product.adminId.toString());
+        // console.log(req.user._id);
+        if (product.adminId.toString() != req.user._id.toString()) {
+            return res.status(400).json({
+                message: "Not authorised to update this product"
+            });
+        }
 
         product.name = name || product.name;
         product.price = price || product.price;
@@ -87,11 +96,11 @@ module.exports.updateProduct = async (req, res, next) => {
         await product.save();
 
         res.status(200).json({
-            message: "Product deleted successfully"
+            message: "Product updated successfully"
         })
     } catch (error) {
         res.status(500).json({
-            message: "Unable to delete product right now",
+            message: "Unable to update product right now",
             error
         })
     }
@@ -149,7 +158,7 @@ module.exports.addBatchData = async (req, res, next) => {
             adminId: req.user._id
         }
     });
-    
+
     if (seedData.length == 0) {
         return res.status(400).json({
             message: "add data to seed"
