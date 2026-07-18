@@ -1,17 +1,24 @@
 import React, { useEffect, useState } from "react";
 import styles from "./ProductPage.module.css";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import api from "../api";
+import { useAuth } from "../context/AuthContext";
 
 const ProductPage = () => {
   const { id } = useParams();
   const [loading, setLoading] = useState(true);
   const [product, setProduct] = useState({});
+  const { setCart } = useAuth();
+  const navigate = useNavigate();
+  async function addToCartHandler(id) {
+    let { data } = await api.get(`/app/add-to-cart/${id}`);
+    console.log(data.cart);
+    setCart(data.cart);
+  }
 
   useEffect(() => {
     async function getProductDetails() {
-      let { data } = await api.get(`/app/get-product/${id}`);
-      //   console.log(data);
+      const { data } = await api.get(`/app/get-product/${id}`);
       return data.product;
     }
 
@@ -20,12 +27,12 @@ const ProductPage = () => {
         setProduct(fetchedProduct);
       })
       .catch((err) => {
-        throw new Error(err);
+        console.error("Unable to fetch product:", err);
       })
       .finally(() => {
         setLoading(false);
       });
-  }, []);
+  }, [id]);
 
   return (
     <>
@@ -56,12 +63,17 @@ const ProductPage = () => {
                 <p>
                   <strong>Category:</strong> {product.category}
                 </p>
-                <p>
+                {/* <p>
                   <strong>Admin ID:</strong> {product.adminId}
-                </p>
+                </p> */}
               </div>
 
-              <button className={styles.cartBtn}>Add to Cart</button>
+              <button
+                className={styles.cartBtn}
+                onClick={() => addToCartHandler(product._id)}
+              >
+                Add to Cart
+              </button>
             </div>
           </div>
         </div>

@@ -12,8 +12,19 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="navbar-logo">
-        <Link to="/">MyApp</Link>
+        <Link to="/dashboard">MyApp</Link>
       </div>
+
+      <span>
+        <Link to="/dashboard">Dashboard</Link>
+        <Link to="/cart">Cart</Link>
+      </span>
+
+      <span>
+        {/* Only for Admins */}
+        <Link to="">Add New Product</Link>
+        <Link to="">View Your Products</Link>
+      </span>
 
       <div className="navbar-links">
         {isAuthenticated ? (

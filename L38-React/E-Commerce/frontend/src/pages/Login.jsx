@@ -20,8 +20,6 @@ const Login = () => {
       newUser[key] = ev.target.value;
       return newUser;
     });
-
-    
   }
 
   async function loginHandler() {
