@@ -4,6 +4,7 @@ import Signup from "./pages/Signup";
 import Navbar from "./components/Navbar";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
+import ProductPage from "./pages/ProductPage";
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
         <Route path="/signup" element={<Signup />} />
 
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/product-details/:id" element={<ProductPage />} />
       </Routes>
     </div>
   );
