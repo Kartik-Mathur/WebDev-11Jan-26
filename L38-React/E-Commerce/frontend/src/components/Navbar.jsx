@@ -22,8 +22,8 @@ const Navbar = () => {
 
       <span>
         {/* Only for Admins */}
-        <Link to="">Add New Product</Link>
-        <Link to="">View Your Products</Link>
+        <Link to="/add-new-product">Add New Product</Link>
+        <Link to="/view-admin-products">View Your Products</Link>
       </span>
 
       <div className="navbar-links">
