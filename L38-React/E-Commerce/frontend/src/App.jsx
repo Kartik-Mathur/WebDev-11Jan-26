@@ -9,6 +9,7 @@ import Cart from "./pages/Cart";
 import AddProduct from "./pages/AddProduct";
 import AdminProducts from "./pages/admin/AdminProducts";
 import UpdateProduct from "./pages/admin/UpdateProduct";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const App = () => {
   return (
@@ -21,10 +22,18 @@ const App = () => {
         <Route path="/signup" element={<Signup />} />
         <Route path="/update-product/:id" element={<UpdateProduct />} />
         <Route path="/view-admin-products" element={<AdminProducts />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/add-new-product" element={<AddProduct />} />
-        <Route path="/product-details/:id" element={<ProductPage />} />
+
+        {/* 
+              Yeh neeche wale sab <Outlet /> ke through 
+              access honge inside ProtectedRoute......
+        */}
+
+        <Route element={<ProtectedRoute />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/add-new-product" element={<AddProduct />} />
+          <Route path="/product-details/:id" element={<ProductPage />} />
+        </Route>
       </Routes>
     </div>
   );

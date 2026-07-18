@@ -15,10 +15,12 @@ const Navbar = () => {
         <Link to="/dashboard">MyApp</Link>
       </div>
 
-      <span>
-        <Link to="/dashboard">Dashboard</Link>
-        <Link to="/cart">Cart</Link>
-      </span>
+      {isAuthenticated && (
+        <span>
+          <Link to="/dashboard">Dashboard</Link>
+          <Link to="/cart">Cart</Link>
+        </span>
+      )}
 
       <span>
         {/* Only for Admins */}
