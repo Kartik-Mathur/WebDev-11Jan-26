@@ -17,17 +17,14 @@ app.get('/', (req, res) => {
 app.post('/upload', upload.single('myimage'), (req, res) => {
     // req.file is the myimage
     console.log(req.file);
+    // Binary data of image: req.file.buffer
+    
     var blob = new Blob([req.file.buffer], { type: 'image/webp' });
     var blobUrl = URL.createObjectURL(blob);
 
     res.render('image', {
         blobUrl
     })
-    // res.json({
-    //     message: "Image recieved",
-    //     // buffer: req.file.buffer,
-    //     blobUrl
-    // });
 })
 
 
