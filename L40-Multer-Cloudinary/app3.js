@@ -18,13 +18,23 @@ app.post('/upload', upload.single('myimage'), (req, res) => {
     // req.file is the myimage
     console.log(req.file);
     // Binary data of image: req.file.buffer
-    
-    var blob = new Blob([req.file.buffer], { type: 'image/webp' });
-    var blobUrl = URL.createObjectURL(blob);
 
-    res.render('image', {
-        blobUrl
-    })
+    // var blob = new Blob([req.file.buffer], { type: 'image/webp' });
+    // var blobUrl = URL.createObjectURL(blob);
+    const buffer = req.file.buffer;
+    const mimeType = req.file.mimetype;
+
+    // 3. Convert the buffer to a base64 string
+    const base64String = buffer.toString('base64');
+
+    // 4. Combine into a Data URL
+    const dataUrl = `data:${mimeType};base64,${base64String}`;
+
+    console.log(dataUrl)
+    res.json(dataUrl)
+    // res.render('image', {
+    //     dataUrl
+    // })
 })
 
 
