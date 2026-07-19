@@ -38,8 +38,14 @@ app.post('/upload', upload.single('myimage'), (req, res) => {
     console.log(req.file);
     cloudinary.uploader
         .upload(req.file.path)
-        .then(result => console.log(result))
-        .catch(err => console.log(err));
+        .then(result => {
+            console.log(result)
+            res.send(result);
+        })
+        .catch(err => {
+            console.log(err)
+            res.send(err);
+        });
 
 })
 
