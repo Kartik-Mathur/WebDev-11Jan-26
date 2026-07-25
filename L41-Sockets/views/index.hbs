@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sockets</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <style>
+        #inp,
+        #btn-chat{
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <span>Active Users <span class="user-count">0</span></span>
+    <h1>Sockets - Chat App</h1>
+    <input type="text" id="inp">
+    <input type="text" placeholder="Enter your name" id="name">
+
+    <button id="btn-join">Join Chat</button>
+    <button id="btn-chat">Send</button>
+    <br>
+
+    <div class="chats"></div>
+    <script>
+        let socket = io();
+        let join = document.getElementById('btn-join');
+
+        join.onclick = function(){
+            let name = document.getElementById('name').value;
+            name = name.trim();
+            if(!name){
+                alert('Enter correct name');
+            }
+            socket.emit('join',{
+                name
+            })
+        }
+    
+        socket.on('welcome',({message, activeUsers})=>{
+            console.log(message, activeUsers);
+        })
+
+    </script>
+</body>
+
+</html>
