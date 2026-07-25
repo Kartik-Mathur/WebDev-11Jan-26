@@ -8,16 +8,16 @@
     <script src="/socket.io/socket.io.js"></script>
     <style>
         #inp,
-        #btn-chat{
+        #btn-chat {
             display: none;
         }
     </style>
 </head>
 
 <body>
-    <span>Active Users <span class="user-count">0</span></span>
+    <span>Active Users <span id="user-count">Join Chat To View</span></span>
     <h1>Sockets - Chat App</h1>
-    <input type="text" id="inp">
+    <input type="text" placeholder="enter message" id="inp">
     <input type="text" placeholder="Enter your name" id="name">
 
     <button id="btn-join">Join Chat</button>
@@ -29,21 +29,56 @@
         let socket = io();
         let join = document.getElementById('btn-join');
 
-        join.onclick = function(){
+        join.onclick = function () {
             let name = document.getElementById('name').value;
             name = name.trim();
-            if(!name){
+            if (!name) {
                 alert('Enter correct name');
             }
-            socket.emit('join',{
+            socket.emit('join', {
                 name
             })
         }
-    
-        socket.on('welcome',({message, activeUsers})=>{
+
+        socket.on('welcome', ({ message, activeUsers, allChats }) => {
             console.log(message, activeUsers);
+            document.getElementById('user-count').innerText = activeUsers
+            let name = document.querySelector('#name');
+            let joinChat = document.querySelector('#btn-join');
+            let inp = document.querySelector('#inp');
+            let btnChat = document.querySelector('#btn-chat');
+            name.style.display = 'none';
+            joinChat.style.display = 'none';
+            btnChat.style.display = 'table';
+            inp.style.display = 'table';
+            let chats = document.querySelector('.chats');   
+            chats.innerText = '';
+
+            allChats.forEach(obj =>{
+                let li = document.createElement('li');
+                li.innerHTML = `${obj.user} - ${obj.message}`;
+                chats.appendChild(li);
+            })
         })
 
+        socket.on('update-user-count', ({ activeUsers }) => {
+            document.getElementById('user-count').innerText = activeUsers
+        })
+
+        let chatBtn = document.querySelector('#btn-chat');
+        let inp = document.querySelector('#inp');
+        let chats = document.querySelector('.chats');
+        chatBtn.onclick = function () {
+            socket.emit('chat-message', {
+                message: inp.value
+            })
+        }
+
+        socket.on('chat-received',({user, message})=>{
+            let li = document.createElement('li');
+            li.innerHTML = `${user} - ${message}`;
+            chats.appendChild(li);
+        })
     </script>
 </body>
 
