@@ -36,8 +36,6 @@ export default function App() {
     ctx.strokeRect(sx, sy, width, height);
   }
 
-  // function drawLine(a, b, c, d) {}
-
   function getCoordinates(e) {
     const rect = canvasRef.current.getBoundingClientRect();
     const x = e.clientX - rect.left;
@@ -178,7 +176,6 @@ export default function App() {
         ref={canvasRef}
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
-        // onMouseLeave={}
         onMouseUp={handleMouseUp}
         height={500}
         width={700}
