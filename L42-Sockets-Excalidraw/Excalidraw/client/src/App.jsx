@@ -1,11 +1,17 @@
 import { useEffect, useRef, useState } from "react";
-// import { socket } from "./socket.js";
+import { socket } from "./socket.js";
 
 export default function App() {
-  // const [isConnected, setIsConnected] = useState(socket.connected);
+  const [isConnected, setIsConnected] = useState(socket.connected);
   const canvasRef = useRef();
   const [drawing, setDrawing] = useState(false);
-  let px, py, ex, ey;
+
+  const [coordinates, setCoordinates] = useState({
+    px: 0,
+    py: 0,
+    ex: 0,
+    ey: 0,
+  });
   const [shape, setShape] = useState("square");
   const [elements, setElements] = useState([]);
 
@@ -47,25 +53,37 @@ export default function App() {
     };
   }
 
-  // useEffect(() => {
-  //   function handleConnect() {
-  //     setIsConnected(true);
-  //   }
+  useEffect(() => {
+    function handleConnect() {
+      setIsConnected(true);
+    }
 
-  //   function handleDisconnect() {
-  //     setIsConnected(false);
-  //   }
+    function handleDisconnect() {
+      setIsConnected(false);
+    }
 
-  //   socket.on("connect", handleConnect);
-  //   socket.on("disconnect", handleDisconnect);
-  //   socket.connect();
+    function handleNewElements({ newElements }) {
+      // setElements(newElements);
+      
+    }
 
-  //   return () => {
-  //     socket.off("connect", handleConnect);
-  //     socket.off("disconnect", handleDisconnect);
-  //     socket.disconnect();
-  //   };
-  // }, []);
+    socket.on("connect", handleConnect);
+    socket.on("disconnect", handleDisconnect);
+    socket.on("new:elements", handleNewElements);
+    socket.connect();
+
+    return () => {
+      socket.off("connect", handleConnect);
+      socket.off("disconnect", handleDisconnect);
+      socket.disconnect();
+    };
+  }, []);
+
+  useEffect(() => {
+    socket.emit("update:elements", {
+      elements,
+    });
+  }, [elements]);
 
   function sendMessage(event) {
     event.preventDefault();
@@ -75,19 +93,23 @@ export default function App() {
     console.log(ev);
     const { x, y } = getCoordinates(ev);
     console.log(x, y);
-    px = x;
-    py = y;
+    let newCoordinates = { ...coordinates };
+    newCoordinates.px = x;
+    newCoordinates.py = y;
+    setCoordinates(newCoordinates);
+    setDrawing(true);
   }
 
   function handleMouseUp(ev) {
+    setDrawing(false);
     const { x, y } = getCoordinates(ev);
 
-    let sx = Math.min(x, px);
-    let sy = Math.min(y, py);
+    let sx = Math.min(x, coordinates.px);
+    let sy = Math.min(y, coordinates.py);
 
     if (shape == "square") {
-      let width = Math.abs(x - px);
-      let height = Math.abs(y - py);
+      let width = Math.abs(x - coordinates.px);
+      let height = Math.abs(y - coordinates.py);
       setElements([
         ...elements,
         {
@@ -103,8 +125,8 @@ export default function App() {
         ...elements,
         {
           shape: "line",
-          sx: px,
-          sy: py,
+          sx: coordinates.px,
+          sy: coordinates.py,
           ex: x,
           ey: y,
         },
@@ -135,13 +157,14 @@ export default function App() {
   }
 
   function handleMouseMove(ev) {
+    if (!drawing) return;
     const { x, y } = getCoordinates(ev);
 
-    let sx = Math.min(x, px);
-    let sy = Math.min(y, py);
+    let sx = Math.min(x, coordinates.px);
+    let sy = Math.min(y, coordinates.py);
     if (shape == "square") {
-      let width = Math.abs(x - px);
-      let height = Math.abs(y - py);
+      let width = Math.abs(x - coordinates.px);
+      let height = Math.abs(y - coordinates.py);
       refreshCanvas();
       drawTempSquare({
         sx,
@@ -152,8 +175,8 @@ export default function App() {
     } else if (shape == "line") {
       refreshCanvas();
       drawTempLine({
-        sx: px,
-        sy: py,
+        sx: coordinates.px,
+        sy: coordinates.py,
         ex: x,
         ey: y,
       });

@@ -22,19 +22,16 @@ const io = new Server(httpServer, {
 io.on("connection", (socket) => {
   console.log(`Connected: ${socket.id}`);
 
-  socket.on("chat:message", (payload) => {
-    const username = String(payload?.username || "Anonymous").trim();
-    const text = String(payload?.text || "").trim();
-
-    if (!text) return;
-
-    io.emit("chat:message", {
-      id: randomUUID(),
-      username: username || "Anonymous",
-      text,
-      sentAt: new Date().toISOString()
+  socket.on("update:elements", (payload) => {
+    const elements = payload.elements;
+    console.log(elements);
+    if (elements.length <= 0) return;
+    io.emit("new:elements", {
+      newElements: elements
     });
   });
+
+
 
   socket.on("disconnect", () => {
     console.log(`Disconnected: ${socket.id}`);
