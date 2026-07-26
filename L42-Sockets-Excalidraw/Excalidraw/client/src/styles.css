@@ -1,0 +1,426 @@
+/* App.css */
+
+/* -------------------------------------------------------
+   EXCALIDRAW-INSPIRED DRAWING BOARD
+   Canvas stays exactly 700 × 500 so pointer coordinates
+   remain accurate with your existing JavaScript.
+-------------------------------------------------------- */
+
+:root {
+  font-family:
+    Inter,
+    ui-sans-serif,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  color: #1b1b1f;
+  background: #f7f7f8;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-width: 100%;
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  min-width: 780px;
+  min-height: 100vh;
+  overflow: auto;
+  background: #f7f7f8;
+}
+
+button,
+canvas {
+  font: inherit;
+}
+
+/* Main workspace */
+
+main {
+  position: relative;
+  isolation: isolate;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 780px;
+  min-height: 100vh;
+  padding: 96px 40px 40px;
+
+  background-color: #f7f7f8;
+  background-image:
+    linear-gradient(
+      rgb(105 101 219 / 2%),
+      rgb(105 101 219 / 2%)
+    ),
+    radial-gradient(
+      circle,
+      rgb(30 30 35 / 8%) 1px,
+      transparent 1.2px
+    );
+
+  background-position:
+    0 0,
+    0 0;
+
+  background-size:
+    100% 100%,
+    24px 24px;
+}
+
+/* Hide the unnecessary line break */
+
+main > br {
+  display: none;
+}
+
+/* -------------------------------------------------------
+   CENTER TOOLBAR CONTAINER
+-------------------------------------------------------- */
+
+main::before {
+  content: "";
+
+  position: fixed;
+  top: 14px;
+  left: 50%;
+  z-index: 10;
+
+  width: 118px;
+  height: 56px;
+
+  background: rgb(255 255 255 / 96%);
+  border: 1px solid #e7e7eb;
+  border-radius: 12px;
+
+  box-shadow:
+    0 1px 2px rgb(0 0 0 / 5%),
+    0 4px 12px rgb(0 0 0 / 8%),
+    0 12px 32px rgb(0 0 0 / 5%);
+
+  backdrop-filter: blur(12px);
+  transform: translateX(-50%);
+}
+
+/* -------------------------------------------------------
+   COMMON BUTTON DESIGN
+-------------------------------------------------------- */
+
+main > button {
+  position: fixed;
+  top: 20px;
+  z-index: 20;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  height: 44px;
+  margin: 0;
+  padding: 0 16px;
+
+  color: #34343a;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1;
+
+  background: rgb(255 255 255 / 96%);
+  border: 1px solid #dedee3;
+  border-radius: 10px;
+
+  box-shadow:
+    0 1px 2px rgb(0 0 0 / 5%),
+    0 3px 10px rgb(0 0 0 / 6%);
+
+  cursor: pointer;
+  user-select: none;
+
+  transition:
+    color 140ms ease,
+    background-color 140ms ease,
+    border-color 140ms ease,
+    box-shadow 140ms ease,
+    transform 100ms ease;
+}
+
+main > button:hover {
+  color: #1b1b1f;
+  background: #f4f3ff;
+  border-color: #cbc8f7;
+
+  box-shadow:
+    0 2px 4px rgb(0 0 0 / 7%),
+    0 6px 16px rgb(0 0 0 / 8%);
+
+  transform: translateY(-1px);
+}
+
+main > button:active {
+  transform: translateY(0) scale(0.96);
+}
+
+main > button:focus {
+  outline: none;
+}
+
+main > button:focus-visible {
+  outline: 3px solid rgb(105 101 219 / 24%);
+  outline-offset: 2px;
+}
+
+/* -------------------------------------------------------
+   CLEAR BUTTON — TOP LEFT
+-------------------------------------------------------- */
+
+main > button:nth-of-type(1) {
+  left: 20px;
+
+  color: #c92a2a;
+  background: rgb(255 255 255 / 96%);
+}
+
+main > button:nth-of-type(1)::before {
+  content: "×";
+
+  display: grid;
+  place-items: center;
+
+  width: 20px;
+  height: 20px;
+
+  color: #c92a2a;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+main > button:nth-of-type(1):hover {
+  color: #b42323;
+  background: #fff1f1;
+  border-color: #ffc9c9;
+}
+
+/* -------------------------------------------------------
+   SQUARE AND LINE TOOL BUTTONS
+-------------------------------------------------------- */
+
+main > button:nth-of-type(2),
+main > button:nth-of-type(3) {
+  top: 20px;
+
+  width: 44px;
+  min-width: 44px;
+  padding: 0;
+
+  font-size: 0;
+  background: transparent;
+  border-color: transparent;
+  border-radius: 8px;
+  box-shadow: none;
+}
+
+/* Square position */
+
+main > button:nth-of-type(2) {
+  left: calc(50% - 50px);
+}
+
+/* Line position */
+
+main > button:nth-of-type(3) {
+  left: calc(50% + 6px);
+}
+
+/* Tool hover */
+
+main > button:nth-of-type(2):hover,
+main > button:nth-of-type(3):hover {
+  color: #4f4bc5;
+  background: #efeffd;
+  border-color: transparent;
+  box-shadow: none;
+  transform: none;
+}
+
+/* Selected/focused tool appearance */
+
+main > button:nth-of-type(2):focus,
+main > button:nth-of-type(3):focus {
+  color: #4f4bc5;
+  background: #e7e6fc;
+  border-color: #d7d5fa;
+}
+
+/* Square icon */
+
+main > button:nth-of-type(2)::before {
+  content: "";
+
+  width: 18px;
+  height: 18px;
+
+  border: 2px solid currentColor;
+  border-radius: 3px;
+
+  transform: rotate(-1deg);
+}
+
+/* Line icon */
+
+main > button:nth-of-type(3)::before {
+  content: "";
+
+  width: 22px;
+  height: 2px;
+
+  background: currentColor;
+  border-radius: 999px;
+
+  transform: rotate(-36deg);
+}
+
+/* Keyboard shortcut badges */
+
+main > button:nth-of-type(2)::after,
+main > button:nth-of-type(3)::after {
+  position: absolute;
+  right: 3px;
+  bottom: 2px;
+
+  color: #86868d;
+  font-size: 9px;
+  font-weight: 600;
+}
+
+main > button:nth-of-type(2)::after {
+  content: "1";
+}
+
+main > button:nth-of-type(3)::after {
+  content: "2";
+}
+
+/* -------------------------------------------------------
+   SAVE BUTTON — TOP RIGHT
+-------------------------------------------------------- */
+
+main > button:nth-of-type(4) {
+  right: 20px;
+
+  min-width: 86px;
+
+  color: #ffffff;
+  background: #6965db;
+  border-color: #6965db;
+
+  box-shadow:
+    0 2px 4px rgb(74 69 183 / 18%),
+    0 6px 14px rgb(74 69 183 / 20%);
+}
+
+main > button:nth-of-type(4)::before {
+  content: "";
+
+  width: 14px;
+  height: 14px;
+
+  border: 2px solid currentColor;
+  border-radius: 2px;
+
+  box-shadow: inset 0 -4px 0 rgb(255 255 255 / 24%);
+}
+
+main > button:nth-of-type(4):hover {
+  color: #ffffff;
+  background: #5753c7;
+  border-color: #5753c7;
+
+  box-shadow:
+    0 3px 6px rgb(74 69 183 / 20%),
+    0 8px 20px rgb(74 69 183 / 24%);
+}
+
+/* -------------------------------------------------------
+   DRAWING CANVAS
+-------------------------------------------------------- */
+
+canvas {
+  display: block;
+
+  /* Keep these equal to canvas HTML attributes */
+  width: 700px;
+  height: 500px;
+
+  background-color: #ffffff;
+  background-image: radial-gradient(
+    circle,
+    rgb(100 100 112 / 18%) 1px,
+    transparent 1.15px
+  );
+
+  background-position: 10px 10px;
+  background-size: 20px 20px;
+
+  border: 1px solid #dedee4 !important;
+  border-radius: 10px;
+
+  box-shadow:
+    0 1px 2px rgb(0 0 0 / 5%),
+    0 8px 24px rgb(0 0 0 / 8%),
+    0 28px 70px rgb(0 0 0 / 7%);
+
+  cursor: crosshair;
+  touch-action: none;
+  user-select: none;
+
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+canvas:hover {
+  border-color: #ccccd3 !important;
+
+  box-shadow:
+    0 1px 3px rgb(0 0 0 / 6%),
+    0 10px 28px rgb(0 0 0 / 9%),
+    0 30px 80px rgb(0 0 0 / 8%);
+}
+
+/* Canvas active state */
+
+canvas:active {
+  cursor: crosshair;
+}
+
+/* -------------------------------------------------------
+   SMALL SCREEN SUPPORT
+   No canvas scaling, because scaling would affect your
+   existing coordinate calculation.
+-------------------------------------------------------- */
+
+@media (max-width: 850px) {
+  body,
+  main {
+    min-width: 760px;
+  }
+
+  main {
+    justify-content: flex-start;
+    padding-right: 30px;
+    padding-left: 30px;
+  }
+}

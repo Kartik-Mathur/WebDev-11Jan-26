@@ -63,8 +63,8 @@ export default function App() {
     }
 
     function handleNewElements({ newElements }) {
-      // setElements(newElements);
-      
+      setElements(newElements);
+      console.log(newElements);
     }
 
     socket.on("connect", handleConnect);
@@ -79,20 +79,20 @@ export default function App() {
     };
   }, []);
 
-  useEffect(() => {
-    socket.emit("update:elements", {
-      elements,
-    });
-  }, [elements]);
+  // useEffect(() => {
+  //   socket.emit("update:elements", {
+  //     elements,
+  //   });
+  // }, [elements]);
 
   function sendMessage(event) {
     event.preventDefault();
   }
 
   function handleMouseDown(ev) {
-    console.log(ev);
+    // console.log(ev);
     const { x, y } = getCoordinates(ev);
-    console.log(x, y);
+    // console.log(x, y);
     let newCoordinates = { ...coordinates };
     newCoordinates.px = x;
     newCoordinates.py = y;
@@ -120,8 +120,28 @@ export default function App() {
           width,
         },
       ]);
+      saveBoard([
+        ...elements,
+        {
+          shape: "square",
+          sx,
+          sy,
+          height,
+          width,
+        },
+      ]);
     } else if (shape == "line") {
       setElements([
+        ...elements,
+        {
+          shape: "line",
+          sx: coordinates.px,
+          sy: coordinates.py,
+          ex: x,
+          ey: y,
+        },
+      ]);
+      saveBoard([
         ...elements,
         {
           shape: "line",
@@ -187,6 +207,13 @@ export default function App() {
     const ctx = canvasRef.current.getContext("2d");
     ctx.reset();
     setElements([]);
+    saveBoard([]);
+  }
+
+  function saveBoard(elements) {
+    socket.emit("update:elements", {
+      elements,
+    });
   }
 
   return (
@@ -194,6 +221,7 @@ export default function App() {
       <button onClick={clearCanvas}>Clear</button>
       <button onClick={() => setShape("square")}>Square</button>
       <button onClick={() => setShape("line")}>Line</button>
+      <button onClick={saveBoard}>Save</button>
       <br />
       <canvas
         ref={canvasRef}
