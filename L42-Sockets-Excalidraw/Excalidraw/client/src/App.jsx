@@ -12,19 +12,23 @@ export default function App() {
   useEffect(() => {
     const ctx = canvasRef.current.getContext("2d");
     ctx.reset();
-    elements.forEach((e) => {
-      if (e.shape == "square") {
-        drawSquare(e);
-      } else if (e.shape == "line") {
-        drawLine(e);
-      }
-    });
+    refreshCanvas();
   }, [elements]);
 
   function drawTempSquare({ sx, sy, height, width }) {
     const ctx = canvasRef.current.getContext("2d");
     ctx.strokeStyle = "red";
     ctx.strokeRect(sx, sy, width, height);
+  }
+
+  function drawTempLine({ sx, sy, ex, ey }) {
+    const ctx = canvasRef.current.getContext("2d");
+    ctx.strokeStyle = "red";
+    ctx.beginPath();
+    ctx.moveTo(sx, sy);
+    ctx.lineTo(ex, ey);
+    ctx.stroke();
+    ctx.closePath();
   }
 
   function drawSquare({ sx, sy, height, width }) {
@@ -70,7 +74,6 @@ export default function App() {
   }
 
   function handleMouseDown(ev) {
-    
     console.log(ev);
     const { x, y } = getCoordinates(ev);
     console.log(x, y);
@@ -109,7 +112,6 @@ export default function App() {
         },
       ]);
     }
-    
   }
 
   function refreshCanvas() {
@@ -119,19 +121,22 @@ export default function App() {
     elements.forEach((e) => {
       if (e.shape == "square") {
         drawSquare(e);
+      } else if (e.shape == "line") {
+        drawLine(e);
       }
     });
   }
 
   function drawLine({ sx, sy, ex, ey }) {
     const ctx = canvasRef.current.getContext("2d");
+    ctx.beginPath();
     ctx.moveTo(sx, sy);
     ctx.lineTo(ex, ey);
     ctx.stroke();
+    ctx.closePath();
   }
 
   function handleMouseMove(ev) {
-
     const { x, y } = getCoordinates(ev);
 
     let sx = Math.min(x, px);
@@ -145,6 +150,14 @@ export default function App() {
         sy,
         height,
         width,
+      });
+    } else if (shape == "line") {
+      refreshCanvas();
+      drawTempLine({
+        sx: px,
+        sy: py,
+        ex: x,
+        ey: y,
       });
     }
   }
