@@ -1,0 +1,15 @@
+{
+  "name": "socketio-chat-server",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch index.js",
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "cors": "latest",
+    "express": "latest",
+    "socket.io": "latest"
+  }
+}
