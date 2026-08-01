@@ -1,5 +1,6 @@
 import React from "react";
 import Counter from "./Counter";
+import Todos from "./Todos";
 
 const App = () => {
   return (
@@ -7,6 +8,7 @@ const App = () => {
       <h1>Learning RTK</h1>
 
       <Counter />
+      <Todos />
     </div>
   );
 };
